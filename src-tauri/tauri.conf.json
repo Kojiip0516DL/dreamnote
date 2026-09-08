@@ -1,0 +1,45 @@
+{
+  "$schema": "https://schema.tauri.app/config/2.0.0",
+  "productName": "DreamNote",
+  "version": "0.1.0",
+  "identifier": "gg.dreamland.dreamnote",
+  "build": {
+    "frontendDist": "../out",
+    "devUrl": "http://localhost:3000",
+    "beforeBuildCommand": "npm run build",
+    "beforeDevCommand": "npm run dev"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "DreamNote",
+        "width": 1280,
+        "height": 820,
+        "minWidth": 880,
+        "minHeight": 560,
+        "decorations": true,
+        "transparent": false,
+        "fullscreen": false
+      }
+    ],
+    "security": { "csp": null },
+    "mobile": {
+      "iOS": { "developmentTeam": null, "bundleId": "gg.dreamland.dreamnote" },
+      "Android": { "minSdkVersion": 24, "targetSdkVersion": 33, "versionCode": 1 }
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": [
+      "src-tauri/icons/icon.png"
+    ],
+    "category": "Productivity",
+    "shortDescription": "Unlimited notes for DreamLand.",
+    "longDescription": "An Obsidian/Notability-style note app, Discord login, cross-platform.",
+    "copyright": "© 2026 DreamLand",
+    "windows": { "wix": { "language": "en-US" } },
+    "linux": { "deb": { "depends": [] } },
+    "macOS": { "minimumSystemVersion": "11.0" }
+  }
+}

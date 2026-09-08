@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body { height: 100%; }
+body { font-family: Inter, system-ui, -apple-system, Segoe UI, sans-serif; }
+
+/* BlockNote tweaks: tighter typography + dark theme harmony */
+.bn-container { background: transparent !important; }
+.bn-editor { padding-left: 0; padding-right: 0; }
+.bn-block-content[data-content-type="heading"] { font-weight: 600; }
+.bn-side-menu { color: #9b9ba3 !important; }
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: #26262d; border-radius: 6px; }
+::-webkit-scrollbar-track { background: transparent; }

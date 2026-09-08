@@ -1,0 +1,33 @@
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Next.js
+.next/
+out/
+
+# Tauri (native shell)
+src-tauri/target/
+src-tauri/gen/
+
+# Node
+node_modules/
+
+# Prisma local SQLite
+prisma/dev.db
+prisma/dev.db-journal
+
+# Server runtime logs
+.logs/
+
+# Temporary / scripts
+.scripts/
+
+# Environment files — NEVER commit
+.env
+.env.*
+!.env.example
+!.env.bot.example
+!.env.production.example

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "version": 2,
+  "buildCommand": "npx prisma generate && npx next build",
+  "env": {
+    "NODE_ENV": "production"
+  },
+  "crons": [
+    {
+      "path": "/api/cron/archive-dailies",
+      "schedule": "0 16 * * *"
+    }
+  ]
+}
