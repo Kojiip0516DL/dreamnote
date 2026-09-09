@@ -39,18 +39,30 @@ Click each row of this table. Production + Preview environments only. Sensitive 
 | `DREAMLAND_MEMBER_ROLE_ID` | paste from `.env.bot` |
 | `DREAMLAND_INVITE_CHANNEL_URL` | `https://discord.gg/dreamland` |
 
-### 2. (Optional) Push the local patch commit
+### 2. (Optional) Push the local patch commits
 
-The local repo has 2 commits ahead of GitHub: a build-time-defer patch and a morning-doc update. They don't fix the missing-env-var issue (which requires step 1). Pushing them just makes the source slightly more forgiving if you ever rotate envs. **Skip if env vars are set — the build will pass.**
+The local repo has 4 commits ahead of GitHub:
+- `20a4d32` — adds `/api/health` endpoint
+- `41757ad` — clarifies the morning doc
+- `a0a6764` — adds MORNING-DEPLOY.md
+- `6bb924a` — defers OAuth validation to runtime
 
-If you want to push, in your Windows terminal:
+They don't fix the missing-env-var issue (which requires step 1). Pushing them just makes the source slightly more forgiving. **Skip if env vars are set — the build will pass with just `e7b6321`.**
+
+**Double-click this file** to push (auto-retries once):
+
+```
+C:\Users\koji\dreamnote\push-to-github.bat
+```
+
+Or manually:
 
 ```bash
 cd C:\Users\koji\dreamnote
 git push origin main
 ```
 
-If asked for credentials, sign in to GitHub. **It should reuse your existing auth** (you already pushed once before).
+If asked for credentials, sign in to GitHub. **It should reuse your existing auth.**
 
 **Note**: `git push` from Hermes's shell hangs on your network — only your terminal can push.
 
