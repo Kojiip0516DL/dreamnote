@@ -39,9 +39,11 @@ Click each row of this table. Production + Preview environments only. Sensitive 
 | `DREAMLAND_MEMBER_ROLE_ID` | paste from `.env.bot` |
 | `DREAMLAND_INVITE_CHANNEL_URL` | `https://discord.gg/dreamland` |
 
-### 2. Push the local patch commit
+### 2. (Optional) Push the local patch commit
 
-In your Windows terminal:
+The local repo has 2 commits ahead of GitHub: a build-time-defer patch and a morning-doc update. They don't fix the missing-env-var issue (which requires step 1). Pushing them just makes the source slightly more forgiving if you ever rotate envs. **Skip if env vars are set — the build will pass.**
+
+If you want to push, in your Windows terminal:
 
 ```bash
 cd C:\Users\koji\dreamnote
@@ -49,6 +51,8 @@ git push origin main
 ```
 
 If asked for credentials, sign in to GitHub. **It should reuse your existing auth** (you already pushed once before).
+
+**Note**: `git push` from Hermes's shell hangs on your network — only your terminal can push.
 
 ### 3. Wait for Vercel auto-deploy
 
