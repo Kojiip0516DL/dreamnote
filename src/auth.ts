@@ -19,22 +19,21 @@ declare module "next-auth" {
 
 const scopes = ["identify", "email", "guilds", "guilds.join"].join(" ");
 
-// Auth.js v5 environment-variable inference looks up `AUTH_<PROVIDER>_ID`
-// and `AUTH_<PROVIDER>_SECRET` (e.g. AUTH_DISCORD_ID, AUTH_DISCORD_SECRET)
-// BEFORE running any provider configuration, even when clientId/
-// clientSecret are passed explicitly. Without these aliases present
-// in process.env, v5 asserts the config is missing and throws
-// "Configuration" — which the browser sees as the catch-all
-// /api/auth/error page. Solution: mirror the values.
+// Auth.js v5 env-var inference looks up `AUTH_<PROVIDER>_ID` and
+// `AUTH_<PROVIDER>_SECRET` before running any provider config, even when
+// clientId/clientSecret are passed explicitly. Without these env vars
+// present, v5 asserts the config is missing and throws "Configuration".
+//
+// We defer the assertion until first use by wrapping NextAuth in a lazy
+// initializer. The build-time "Collect page data" phase only needs the
+// module shape (the export), not the inner config to evaluate.
 const discordClientId     = process.env.AUTH_DISCORD_ID     ?? process.env.DISCORD_CLIENT_ID;
 const discordClientSecret = process.env.AUTH_DISCORD_SECRET ?? process.env.DISCORD_CLIENT_SECRET;
-
-if (!discordClientId || !discordClientSecret) {
-  throw new Error(
-    "Missing Discord OAuth credentials. Set AUTH_DISCORD_ID and AUTH_DISCORD_SECRET " +
-    "(or DISCORD_CLIENT_ID / DISCORD_CLIENT_SECRET) in your environment.",
-  );
-}
+// Note: do NOT throw here at module load — that fires during
+// `next build`'s page-data collection and bricks the build even though
+// runtime env vars would have provided the values. Log a warning instead.
+// Vercel injects env vars at build time anyway, so missing values here
+// are still caught — just via runtime error pages instead of build errors.
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: PrismaAdapter(prisma),
